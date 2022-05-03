@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallMover : MonoBehaviour
+public class Flight : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class BallMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(1,0,0) * Time.deltaTime;
+        
     }
 }
