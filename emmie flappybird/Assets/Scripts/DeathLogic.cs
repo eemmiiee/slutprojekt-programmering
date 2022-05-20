@@ -7,7 +7,9 @@ public class DeathLogic : MonoBehaviour
     public string enemyTag = "Enemy";
     public ParticleSystem blowUp;
     public float slowTimeDuration = 1;
+    public float deathMenuTime = 0.5f;
     public float minScaledTime = 0.05f;
+    public GameObject deathMenu;
 
 
     public void OnCollisionEnter2D(Collision2D col){
@@ -29,6 +31,11 @@ public class DeathLogic : MonoBehaviour
     IEnumerator SlowTime(float duration = 1){
         for(float t = 0; t < duration; t += Time.unscaledDeltaTime){
             Time.timeScale = Mathf.Lerp(1, minScaledTime, t/duration);
+
+            if(t > deathMenuTime){
+                deathMenu.SetActive(true);
+            }
+
             yield return null;
         }
     }
