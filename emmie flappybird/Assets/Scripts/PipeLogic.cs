@@ -7,6 +7,8 @@ public class PipeLogic : MonoBehaviour
     public GameObject pipePrefab;
     public float startX = 10;
     public float endX = -10;
+    public float maxHeight = 1;
+    public float minHeight = -1;
     public float moveSpeed = 1;
     public float spawnTime = 3;
 
@@ -14,9 +16,7 @@ public class PipeLogic : MonoBehaviour
     List<GameObject> activePipes = new List<GameObject>();
     private float timer = 0;
 
-    void Start(){
-        SpawnPipe();
-    }
+
 
 
     // Update is called once per frame
@@ -41,7 +41,9 @@ public class PipeLogic : MonoBehaviour
     }
 
     void SpawnPipe(){
-        activePipes.Add(Instantiate(pipePrefab, new Vector3(startX,0,0), Quaternion.identity));
+        float randomHeight = Random.Range(minHeight, maxHeight);
+
+        activePipes.Add(Instantiate(pipePrefab, new Vector3(startX,randomHeight,0), Quaternion.identity));
     }
     void RemovePipe(){
         for(int i = 0; i < activePipes.Count; i++){
