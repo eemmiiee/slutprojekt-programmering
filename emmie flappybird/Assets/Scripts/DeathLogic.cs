@@ -12,6 +12,8 @@ public class DeathLogic : MonoBehaviour
     public GameObject deathMenu;
 
 
+
+    // Kills the bird
     public void OnCollisionEnter2D(Collision2D col){
         if(col.collider.CompareTag(enemyTag)){
             KillBird();
@@ -27,7 +29,8 @@ public class DeathLogic : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(SlowTime(slowTimeDuration));
     }
-
+    
+    // Slow speed for expolsion 
     IEnumerator SlowTime(float duration = 1){
         for(float t = 0; t < duration; t += Time.unscaledDeltaTime){
             Time.timeScale = Mathf.Lerp(1, minScaledTime, t/duration);

@@ -16,6 +16,7 @@ public class Flight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Bird jump when you press the spacebar 
         if(Input.GetKeyDown(KeyCode.Space)){
             rb.velocity = flygHastighet;
         }
