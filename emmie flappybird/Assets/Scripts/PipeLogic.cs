@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class PipeLogic : MonoBehaviour
 {
+    private ScoreManager score;
     public GameObject pipePrefab;
     public float startX = 10;
     public float endX = -10;
     public float maxHeight = 1;
     public float minHeight = -1;
-    public float moveSpeed = 1;
-    public float spawnTime = 3;
+    public float startMoveSpeed = 1;
+    public float startSpawnTime = 3;
+    public float scoreFactor = 3;
 
 
     List<GameObject> activePipes = new List<GameObject>();
     private float timer = 0;
 
 
-
+    void Start(){
+        score = FindObjectOfType<ScoreManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,11 +31,12 @@ public class PipeLogic : MonoBehaviour
             SpawnPipe();
         }
 
-
+        
 
 
 
         MovePipes();
+        float spawnTime = startSpawnTime * Mathf.Exp(score.Score * -1/scoreFactor);
 
         timer += Time.deltaTime;
         if(timer >= spawnTime) {
@@ -55,7 +60,11 @@ public class PipeLogic : MonoBehaviour
     }
     void MovePipes(){
         foreach(GameObject pipe in activePipes){
+            float moveSpeed = getMoveSpeed();
             pipe.transform.position += new Vector3(-moveSpeed, 0, 0) * Time.deltaTime;
         }
+    }
+    float getMoveSpeed(){
+        return startMoveSpeed * (Mathf.Log(score.Score + 1)/scoreFactor + 1);
     }
 }
